@@ -1,23 +1,37 @@
-# BLOXITY Classic — November 2017-inspired refresh
+# BLOXITY Classic — Remake visual 2016–2017
 
-This is an original frontend refresh for the existing BLOXITY Classic repository. The visual direction takes inspiration from compact 2016–2017 game portals and the CodePen remake shared by the project owner. It does not copy Roblox proprietary source code or import Roblox-owned game assets.
+Esta entrega reconstruye la interfaz de BLOXITY con una dirección visual inspirada en los portales de juegos de 2016–2017: barra azul compacta, navegación lateral, fondo gris, paneles blancos, pestañas, tarjetas densas y botones clásicos. Es una implementación original; no incluye código propietario ni recursos oficiales de Roblox.
 
-## Files
-- `index.html` — classic navigation and page structure.
-- `style.css` — compact blue navigation, gray background, square panels, classic buttons and responsive layout.
-- `app.js` — existing frontend flows for Supabase Auth, profiles, balances, catalog, inventory, daily rewards and protected admin-link visibility.
-- `config.js` — existing Supabase project URL and browser-safe publishable key.
+## Archivos
+- `index.html`: estructura completa de las páginas.
+- `style.css`: diseño clásico y adaptación a móviles.
+- `app.js`: navegación, búsqueda, autenticación, perfil, catálogo, inventario, recompensas y guardado de colores del avatar.
+- `config.js`: URL y clave pública (publishable) del proyecto Supabase existente.
 
-## Install
-1. Download and extract the ZIP.
-2. In `Guest-commits/bloxity-classic`, replace the five root files with the five files in this folder.
-3. Commit the changes to `main`.
-4. If GitHub Pages is enabled, wait for the deployment and reload the site.
+## Instalar en GitHub
+1. Descarga y extrae el ZIP.
+2. Abre el repositorio `Guest-commits/bloxity-classic`.
+3. Reemplaza los archivos `index.html`, `style.css`, `app.js`, `config.js` y `README.md` por los de este ZIP.
+4. Haz commit en la rama `main`.
+5. Si GitHub Pages está configurado para `main` y `/ (root)`, espera a que termine el despliegue.
 
-## Important
-- This is a visual/frontend update, not a complete Roblox revival or game engine.
-- Game tiles remain preview cards; there are no multiplayer servers or game runtime.
-- The avatar editor currently saves body, shirt and pants colors only.
-- The admin page remains a protected placeholder; no moderation or economy administration tools are implemented.
-- No database migration is included or required for this visual refresh. It uses the existing Supabase project and existing schema/RPCs.
-- Keep Row Level Security enabled. Never place a Supabase `service_role` key or database password in browser files.
+## Funciones conectadas
+- Supabase Auth: registro e inicio de sesión por correo/contraseña.
+- Perfil y balances desde `profiles`.
+- Catálogo desde `catalog_items`.
+- Inventario desde `user_inventory`.
+- Compras mediante RPC `purchase_catalog_item`.
+- Recompensa diaria Tix mediante `claim_tix_daily_reward`.
+- Recompensa Builders Club mediante `claim_builders_club_daily_reward`.
+- Visibilidad del enlace de administración comprobando `bloxity_admins`.
+
+## Limitaciones importantes
+- Las tarjetas de juegos son demostraciones visuales: no ejecutan juegos ni tienen servidores multijugador.
+- Mensajes, amigos, grupos, clasificaciones y publicación de juegos muestran estados informativos; aún no tienen backend.
+- El avatar es una previsualización R6 dibujada con CSS y guarda únicamente colores en el perfil; no carga mallas 3D ni equipamiento real.
+- Builders Club se muestra visualmente; la compra/selección de membresía no está activada.
+- El área de administración es solo un marcador de posición. Ocultar un enlace no es una barrera de seguridad: cualquier herramienta administrativa futura debe autorizarse en el servidor/RPC y con RLS.
+- No se incluye migración ni se modifica la base de datos existente.
+
+## Seguridad
+`config.js` conserva únicamente la clave pública publishable del proyecto, que está diseñada para usarse en el navegador. Nunca pongas una clave `service_role`, una secret key ni una contraseña de base de datos en archivos públicos. Mantén RLS habilitado y verifica las políticas de cada tabla y función antes de publicar para otros usuarios.
