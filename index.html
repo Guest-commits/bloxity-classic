@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0067a8"><title>BLOXITY — Classic</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <button class="hamburger" id="menuToggle" aria-label="Abrir menú">☰</button>
+  <a class="brand" href="#home" aria-label="BLOXITY inicio"><span class="brand-mark">B</span><b>BLOXITY</b></a>
+  <nav class="topnav" id="topNav"><a href="#games">Juegos</a><a href="#catalog">Catálogo</a><a href="#avatar">Avatar</a><a href="#profile">Perfil</a></nav>
+  <label class="search"><input id="globalSearch" placeholder="Buscar" autocomplete="off"><button id="searchBtn" aria-label="Buscar">⌕</button></label>
+  <div class="wallet"><span title="Robux" class="currency robux">R$ <b id="robuxBalance">0</b></span><span title="Tickets" class="currency tix">▤ <b id="tixBalance">0</b></span></div>
+  <button class="account-button" id="accountButton">Iniciar sesión</button>
+</header>
+<aside class="side-menu" id="sideMenu"><div class="side-user" id="sideUser">Invitado</div><a href="#home">Inicio</a><a href="#games">Juegos</a><a href="#catalog">Catálogo</a><a href="#avatar">Avatar</a><a href="#profile">Mi perfil</a><a href="#inventory">Inventario</a><a href="#admin" id="adminLink" hidden>Administración</a><button id="logoutButton" class="link-button" hidden>Cerrar sesión</button></aside>
+<div class="scrim" id="scrim"></div>
+<main class="page-shell">
+  <div id="notice" class="notice" hidden></div>
+  <section class="view active" id="view-home">
+    <div class="welcome-panel panel"><div class="welcome-avatar" id="welcomeAvatar">B</div><div><p class="eyebrow">BIENVENIDO A BLOXITY</p><h1 id="welcomeTitle">¡Hola!</h1><p class="muted">Juega, crea tu avatar y descubre experiencias.</p></div><div class="welcome-actions"><a class="blue-button" href="#games">Explorar juegos</a></div></div>
+    <div class="section-heading"><h2>Amigos</h2><a href="#profile">Ver perfil</a></div>
+    <div class="panel friends-strip" id="friendsStrip"><div class="empty-friends">Inicia sesión para ver tu comunidad.</div></div>
+    <div class="section-heading"><h2>Juegos destacados</h2><a href="#games">Ver todos</a></div>
+    <div class="game-grid" id="homeGames"></div>
+    <div class="section-heading"><h2>Artículos destacados</h2><a href="#catalog">Ver catálogo</a></div>
+    <div class="catalog-grid compact" id="homeCatalog"></div>
+  </section>
+  <section class="view" id="view-games"><div class="section-heading"><h1>Juegos</h1><span class="muted">Descubre experiencias de la comunidad</span></div><div class="filter-row"><button class="filter active">Destacados</button><button class="filter">Populares</button><button class="filter">Recientes</button></div><div class="game-grid" id="allGames"></div></section>
+  <section class="view" id="view-catalog"><div class="catalog-layout"><aside class="category-panel panel"><h2>Catálogo</h2><p class="muted small">Categorías</p><button class="category active" data-category="all">Todos los artículos</button><button class="category" data-category="hat">Sombreros</button><button class="category" data-category="face">Caras</button><button class="category" data-category="gear">Gear</button><button class="category" data-category="accessory">Accesorios</button></aside><div class="catalog-main"><div class="section-heading"><h1>Artículos destacados</h1><div class="catalog-search"><input id="catalogSearch" placeholder="Buscar artículos"></div></div><div class="catalog-grid" id="catalogGrid"><p class="muted">Cargando catálogo…</p></div></div></div></section>
+  <section class="view" id="view-avatar"><div class="section-heading"><h1>Editor de avatar</h1><span class="muted">Personaliza los colores de tu personaje</span></div><div class="avatar-editor panel"><div class="avatar-stage"><div class="block-avatar" id="blockAvatar"><div class="avatar-head"><span>☺</span></div><div class="avatar-torso"></div><div class="avatar-legs"><i></i><i></i></div></div></div><div class="avatar-controls"><h2>Apariencia clásica</h2><label>Color del cuerpo <input type="color" id="bodyColor" value="#f2c078"></label><label>Color de camisa <input type="color" id="shirtColor" value="#00a2ff"></label><label>Color de pantalón <input type="color" id="pantsColor" value="#30343b"></label><button class="blue-button" id="saveAvatar">Guardar apariencia</button><p class="muted small">El editor R6/R15 completo se añadirá en una etapa posterior.</p></div></div></section>
+  <section class="view" id="view-profile"><div class="section-heading"><h1>Perfil</h1></div><div class="profile-card panel"><div class="profile-avatar" id="profileAvatar">B</div><div><h2 id="profileName">Invitado</h2><p class="muted" id="profileId">Inicia sesión para ver tu perfil.</p><p id="profileClub" class="club-label"></p></div></div><div class="section-heading"><h2>Resumen</h2></div><div class="stats-grid"><div class="panel stat"><span>Robux</span><b id="profileRobux">0</b></div><div class="panel stat"><span>Tickets</span><b id="profileTix">0</b></div><div class="panel stat"><span>Inventario</span><b id="inventoryCount">—</b></div></div><div class="panel daily-panel"><h2>Recompensas diarias</h2><p class="muted">Reclama tus recompensas cuando estén disponibles.</p><div class="daily-buttons"><button class="blue-button" id="claimTix">Reclamar 10 Tix</button><button class="blue-button" id="claimBc">Recompensa BC: 85 Robux</button></div></div></section>
+  <section class="view" id="view-inventory"><div class="section-heading"><h1>Inventario</h1></div><div class="catalog-grid" id="inventoryGrid"><div class="panel empty-state">Inicia sesión para consultar tu inventario.</div></div></section>
+  <section class="view" id="view-admin"><div class="section-heading"><h1>Administración</h1><span class="muted">Herramientas protegidas por permisos del servidor</span></div><div class="panel admin-placeholder"><h2>Panel administrativo</h2><p>Tu cuenta no verá ni podrá usar herramientas administrativas salvo que su Player ID tenga permisos en la base de datos.</p><p class="muted small">Los módulos de moderación, gestión de juegos y auditoría se habilitarán cuando sus tablas y políticas estén implementadas y auditadas.</p></div></section>
+</main>
+<footer class="footer">BLOXITY · Proyecto independiente inspirado en interfaces de juegos clásicos. No afiliado a Roblox Corporation.</footer>
+<div class="modal-backdrop" id="authModal" hidden><div class="auth-modal panel"><button class="modal-close" id="closeAuth">×</button><div class="auth-logo"><span class="brand-mark">B</span><b>BLOXITY</b></div><div class="auth-tabs"><button class="active" data-auth-tab="login">Iniciar sesión</button><button data-auth-tab="signup">Registrarse</button></div><form id="authForm"><label id="usernameField" hidden>Nombre de usuario<input id="usernameInput" minlength="3" maxlength="20" pattern="[A-Za-z0-9_]{3,20}" autocomplete="username"></label><label>Correo electrónico<input id="emailInput" type="email" required autocomplete="email"></label><label>Contraseña<input id="passwordInput" type="password" required minlength="6" autocomplete="current-password"></label><button class="blue-button full" id="authSubmit">Iniciar sesión</button><p class="muted small" id="authMessage">Usa tu cuenta de BLOXITY.</p></form></div></div>
+</body></html>
