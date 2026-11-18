@@ -1,33 +1,23 @@
-# BLOXITY Classic — v0.1 foundation
+# BLOXITY Classic — November 2017-inspired refresh
 
-A clean, original fan project inspired by the compact 2016–2017 game-portal layout. It is not affiliated with Roblox Corporation and does not include Roblox proprietary code, binaries, branding assets, or game assets.
+This is an original frontend refresh for the existing BLOXITY Classic repository. The visual direction takes inspiration from compact 2016–2017 game portals and the CodePen remake shared by the project owner. It does not copy Roblox proprietary source code or import Roblox-owned game assets.
 
-## Included
-- Classic blue navigation, hamburger menu, gray page background and white panels.
-- Responsive home, games, catalog, avatar, profile and inventory views.
-- Supabase Auth sign-in/sign-up using email and password plus username metadata.
-- Reads the existing `profiles`, `catalog_items`, `user_inventory`, and `bloxity_admins` tables.
-- Uses the existing RPCs `purchase_catalog_item`, `claim_tix_daily_reward`, and `claim_builders_club_daily_reward`.
-- Robux and Tix remain separate currencies.
+## Files
+- `index.html` — classic navigation and page structure.
+- `style.css` — compact blue navigation, gray background, square panels, classic buttons and responsive layout.
+- `app.js` — existing frontend flows for Supabase Auth, profiles, balances, catalog, inventory, daily rewards and protected admin-link visibility.
+- `config.js` — existing Supabase project URL and browser-safe publishable key.
 
-## Setup
-1. Upload the files in this folder to the root of `Guest-commits/bloxity-classic`.
-2. Keep `config.js` with the Supabase project URL and publishable key. A publishable/anon key is intended for browser use; never add a `service_role` key or database password.
-3. Enable GitHub Pages or deploy the folder to your static hosting provider.
-4. In Supabase Auth URL Configuration, add the deployed website URL to Site URL / Redirect URLs.
-5. Test with a non-admin test account first.
+## Install
+1. Download and extract the ZIP.
+2. In `Guest-commits/bloxity-classic`, replace the five root files with the five files in this folder.
+3. Commit the changes to `main`.
+4. If GitHub Pages is enabled, wait for the deployment and reload the site.
 
-## Important limitations
-- This is a new frontend foundation, not a complete game revival.
-- Game cards are clearly marked previews; no multiplayer game servers or game runtime are included.
-- The avatar editor currently saves body/shirt/pants colors only; full R6/R15 rendering and clothing/accessory fitting are not implemented.
-- Catalog cards display the existing catalog records. Image URLs are not present in the current `catalog_items` schema, so the cards use category illustrations until an asset/image field is added safely.
-- The admin view is a protected placeholder. It checks membership in `bloxity_admins` but does not yet perform moderation, bans, economy adjustments, or staff-role management.
-- No new SQL migration is required for this frontend foundation. It relies on the existing database schema and RPCs. Do not reset or recreate the existing Supabase project.
-- Supabase Row Level Security and server-side authorization must remain enabled. Do not expose privileged keys in browser code.
-
-## Existing Supabase fields used
-`profiles`: id, username, player_id, robux_balance, tix_balance, bc_tier, body_color, shirt_color, pants_color.
-`catalog_items`: item_id, name, category, price, active, price_currency, bc_tier_required, is_gear.
-`user_inventory`: user_id, item_id, purchased_at.
-`bloxity_admins`: player_id.
+## Important
+- This is a visual/frontend update, not a complete Roblox revival or game engine.
+- Game tiles remain preview cards; there are no multiplayer servers or game runtime.
+- The avatar editor currently saves body, shirt and pants colors only.
+- The admin page remains a protected placeholder; no moderation or economy administration tools are implemented.
+- No database migration is included or required for this visual refresh. It uses the existing Supabase project and existing schema/RPCs.
+- Keep Row Level Security enabled. Never place a Supabase `service_role` key or database password in browser files.
